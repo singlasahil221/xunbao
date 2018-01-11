@@ -4,9 +4,9 @@ from . import views
 app_name = 'myapp'
 
 urlpatterns = [
-    # xunbao/home
+    # xunbao/
     url(r'^$', views.index, name='index'),
 
-    # xunbao/register
-    url(r'^login/$', views.UserFormView.as_view(), name='login'),
+    # xunbao/login/
+    url(r'^login/$', views.my_login, name='login'),
 ]
