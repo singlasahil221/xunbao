@@ -9,4 +9,7 @@ urlpatterns = [
 
     # xunbao/login/
     url(r'^login/$', views.my_login, name='login'),
+
+    # xunbao/leaderboard/
+    url(r'^leaderboard/$', views.leaderboard, name='leaderboard'),
 ]

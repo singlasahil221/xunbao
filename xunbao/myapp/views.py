@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from datetime import datetime
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
 from .models import Problems, Profile
@@ -28,6 +29,7 @@ def index(request):
         if form.is_valid():
             if form.cleaned_data['ans'] == myproblem.ans:
                 myprofile.solved = count + 1
+                myprofile.timetaken = datetime.now()
                 myprofile.save()
                 return HttpResponseRedirect(reverse('myapp:index'))
             else:
@@ -45,3 +47,10 @@ def index(request):
 
 def my_login(request):
     return render(request, 'myapp/register.html', {})
+
+
+def leaderboard(request):
+    profiles = Profile.objects.all()
+    return render(request, 'myapp/leaderboard.html', {
+        'profiles': profiles,
+    })

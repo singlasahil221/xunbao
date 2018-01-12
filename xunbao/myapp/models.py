@@ -8,6 +8,10 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     solved = models.IntegerField(default=1)
+    timetaken = models.DateTimeField(default=datetime.now)
+
+    class Meta:
+        ordering = ['-solved', 'timetaken']
 
 
 @receiver(post_save, sender=User)
