@@ -1,2 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+
+
+class AnswerForm(forms.Form):
+    ans = forms.CharField(label='Answer here...', max_length=1000)
