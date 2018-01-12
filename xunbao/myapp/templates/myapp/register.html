@@ -1,2 +1,12 @@
-<h3>Please login first!</h3>
-<a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
+{% extends 'myapp/base.html' %}
+{% block loga %}<a href="{% url 'social:begin' 'google-oauth2' %}">{% endblock %}
+{% block log %}Login with google{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <strong>You must login first!</strong>
+            </div>
+        </div>
+    </div>
+{% endblock %}

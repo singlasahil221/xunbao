@@ -12,4 +12,7 @@ urlpatterns = [
 
     # xunbao/leaderboard/
     url(r'^leaderboard/$', views.leaderboard, name='leaderboard'),
+
+    # logout
+    url(r'^logout/$', views.my_logout, name='logout'),
 ]

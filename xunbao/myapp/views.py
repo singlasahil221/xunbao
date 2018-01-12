@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRe
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from datetime import datetime
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
 from .models import Problems, Profile
 from .forms import AnswerForm
@@ -49,8 +49,14 @@ def my_login(request):
     return render(request, 'myapp/register.html', {})
 
 
+@login_required
 def leaderboard(request):
     profiles = Profile.objects.all()
     return render(request, 'myapp/leaderboard.html', {
         'profiles': profiles,
     })
+
+
+def my_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('myapp:index'))

@@ -1,20 +1,33 @@
-<h2>Hello {{ user.username }}!</h2>
-{% for problem in problems %}
-    {% if forloop.counter == count %}
-        <h2>you are on problem : {{ forloop.counter }}</h2>
-        <h3>{{ problem.desc }}</h3>
-        {{ break }}
-    {% endif %}
-{% endfor %}
-{% if count > total %}
-    <h3>Congrats, you have solved all of the problems!</h3>
-    <a href="">Please visit our leaderboard!</a>
-{% else %}
-    <h5>{{ msg }}</h5>
-    <form action="" enctype="multipart/form-data" method="post" role="form">
-        {% csrf_token %}
-        {% include 'myapp/form-template.html' %}
-        <button type="submit">Submit</button>
-    </form>
-{% endif %}
-<a href="{% url 'myapp:leaderboard' %}">Leaderboard</a>
+{% extends 'myapp/base.html' %}
+
+{% block body %}
+<div class="">
+
+</div>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <p>Hello {{ user.username }}!</p>
+        </div>
+        <div class="panel-body">
+            {% for problem in problems %}
+                {% if forloop.counter == count %}
+                    <h2>you are on problem : {{ forloop.counter }}</h2>
+                    <h3>{{ problem.desc }}</h3>
+                    {{ break }}
+                {% endif %}
+            {% endfor %}
+            {% if count > total %}
+                <h3>Congrats, you have solved all of the problems!</h3>
+                <a href="">Please visit our leaderboard!</a>
+            {% else %}
+                <h5>{{ msg }}</h5>
+                <form action="" enctype="multipart/form-data" method="post" role="form">
+                    {% csrf_token %}
+                    {% include 'myapp/form-template.html' %}
+                    <button type="submit">Submit</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
