@@ -19,7 +19,7 @@
             {% endfor %}
             {% if count > total %}
                 <h3>Congrats, you have solved all of the problems!</h3>
-                <a href="">Please visit our leaderboard!</a>
+                <a href="{% url 'myapp:leaderboard' %}">Please visit our leaderboard!</a>
             {% else %}
                 <h5>{{ msg }}</h5>
                 <form action="" enctype="multipart/form-data" method="post" role="form">
