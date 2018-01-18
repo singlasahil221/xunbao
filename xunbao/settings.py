@@ -141,8 +141,8 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_URL = 'myapp:login'
 LOGIN_REDIRECT_URL = 'myapp:index'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '209992460881-ml1tficb1rcmpqtt2npkaqgsjf4rm5pq.apps.googleusercontent.com'  # Paste Client Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'JQ_PNUNLh10iLVeTyNfseoc6'  # Paste Secret Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '862926624613-53tvivj2po8dkk23390qepft6k7tq2fu.apps.googleusercontent.com'  # Paste Client Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'kPDE-WGonuyYsUGVD6v2-26f'  # Paste Secret Key
 
 
 
