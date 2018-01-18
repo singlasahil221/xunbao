@@ -16,6 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+PROJECT_DIR = os.path.dirname(__file__)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -115,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -126,8 +127,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-STATIC_URL = '/static/'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
@@ -145,5 +144,17 @@ LOGIN_REDIRECT_URL = 'myapp:index'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '209992460881-ml1tficb1rcmpqtt2npkaqgsjf4rm5pq.apps.googleusercontent.com'  # Paste Client Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'JQ_PNUNLh10iLVeTyNfseoc6'  # Paste Secret Key
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
+
 MEDIA_URL = '/media/'
+
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_DIR, 'staticfiles'),
+)
