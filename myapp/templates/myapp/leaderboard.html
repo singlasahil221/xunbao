@@ -1,7 +1,7 @@
 {% extends 'myapp/base.html' %}
 
 {% block body %}
-<div class="container-fluid">
+<div class="container-fluid" style="opacity: 0.6">
     <div class="panel panel-default">
         <div class="panel-body">
             <table class="responsive">
@@ -9,7 +9,7 @@
                   <tr>
                       <th>Rank</th>
                       <th>Name</th>
-                      <th>Level</th>
+                      <th>Score</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -22,7 +22,7 @@
                             {{ profile.user.username }}
                         </td>
                         <td>
-                            {{ profile.solved }}
+                            {{ profile.solved|add:"-1" }}
                         </td>
                     </tr>
                     {% endfor %}
