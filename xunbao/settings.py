@@ -49,7 +49,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'xunbao.urls'
 
@@ -72,7 +75,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'xunbao.wsgi.application'
-
+ALLOWED_HOSTS = ['*']
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -87,7 +90,9 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
