@@ -15,4 +15,7 @@ urlpatterns = [
 
     # logout
     url(r'^logout/$', views.my_logout, name='logout'),
+
+    # /xunbao/developers/
+    url(r'^developers/$', views.developers, name='developers'),
 ]

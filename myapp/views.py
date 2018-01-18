@@ -60,3 +60,8 @@ def leaderboard(request):
 def my_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('myapp:index'))
+
+
+@login_required
+def developers(request):
+    return render(request, 'myapp/developers.html',{})

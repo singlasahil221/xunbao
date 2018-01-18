@@ -27,6 +27,6 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Problems(models.Model):
     desc = models.CharField(max_length=100000, blank=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.FileField(blank=True)
     ans = models.CharField(max_length=10000, null=True)
     mydate = models.DateTimeField(default=datetime.now)

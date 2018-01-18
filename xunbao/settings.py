@@ -138,3 +138,6 @@ LOGIN_REDIRECT_URL = 'myapp:index'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '209992460881-ml1tficb1rcmpqtt2npkaqgsjf4rm5pq.apps.googleusercontent.com'  # Paste Client Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'JQ_PNUNLh10iLVeTyNfseoc6'  # Paste Secret Key
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

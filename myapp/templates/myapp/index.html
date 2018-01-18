@@ -7,13 +7,14 @@
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-body">
-            <p>Hello {{ user.username }}!</p>
+            <p>Hey {{ user.username }}!</p>
         </div>
         <div class="panel-body">
             {% for problem in problems %}
                 {% if forloop.counter == count %}
                     <h2>you are on problem : {{ forloop.counter }}</h2>
                     <h3>{{ problem.desc }}</h3>
+                    <img src="/media/{{ problem.image }}" class="img-responsive" style="width: 300px; height: 200px;">
                     {{ break }}
                 {% endif %}
             {% endfor %}
