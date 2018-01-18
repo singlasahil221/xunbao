@@ -49,7 +49,6 @@ def my_login(request):
     return render(request, 'myapp/register.html', {})
 
 
-@login_required
 def leaderboard(request):
     profiles = Profile.objects.all()
     return render(request, 'myapp/leaderboard.html', {
@@ -62,6 +61,5 @@ def my_logout(request):
     return HttpResponseRedirect(reverse('myapp:index'))
 
 
-@login_required
 def developers(request):
-    return render(request, 'myapp/developers.html',{})
+    return render(request, 'myapp/developers.html', {})
