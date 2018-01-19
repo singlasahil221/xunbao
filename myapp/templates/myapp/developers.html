@@ -1,26 +1,49 @@
 {% extends 'myapp/base.html' %}
 {%load static%}
 {% block body %}
-<div class="row" style="align-content: center;">
-    <div class="col-sm-4" >
-        <div class="card bg-primary text-white" style="width:400px;">
-            <img class="card-img-top img-responsive" src="{% static 'images/ajay.jpg' %}" alt="Card image" style="width:100%;">
-            <div class="card-body" style="filter: alpha(opacity=30);">
-              <h4 class="card-title">Ajay Verma</h4>
-              <p class="card-text">(+91)7009454212</p>
-              <a href="fb.com/avcool1" class="btn btn-primary">See Profile</a>
-            </div>
+<div>
+  <section class="section-news" >
+      <h3 class="sr-only">News</h3>
+      <div class="container">
+        <style scoped>
+        @import "{% static 'css/landio.min.css' %}";
+    </style>
+
+        <div class="row align-items-center no-gutters bg-dark">
+          <div class="col-md">
+            <figure class="has-light-mask mb-0 image-effect">
+              <img src="{%static 'images/ajay.png'%}" alt="Article thumbnail" class="img-fluid">
+            </figure>
+          </div>
+           <div class="col-md" >
+            <article class="mx-auto">
+              
+              <h5 style="font-size: 28px;">Ajay Verma</h5>
+              <p class="mb-0" style="font-size: 16px;">
+                <a href="tel:(+91)7009454212" ><span class="badge badge-default text-uppercase" style="font-size: 16px;"><span></span>Contact:</span>(+91)7009454212</a>
+              </p><br><br>
+              <a href="http://fb.com/avcool1" ><span class="badge badge-info" style="font-size: 24;">See Profile</span></a>
+            </article>
+          </div>
         </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="card bg-primary text-white" style="width:400px;">
-            <img class="card-img-top img-responsive" src="{% static 'images/ajay.jpg' %}" alt="Card image" style="width:100%;">
-            <div class="card-body">
-              <h4 class="card-title">Sahil Singla</h4>
-              <p class="card-text">(+91)8745959048</p>
-              <a href="fb.com/sahil.singla.3388" class="btn btn-primary">See Profile</a>
-            </div>
+        <div class="row align-items-center no-gutters bg-dark flex-md-row-reverse">
+          <div class="col-md">
+            <figure class="has-light-mask mb-0 image-effect">
+              <img src="{%static 'images/sahil.jpg'%}" alt="Article thumbnail" class="img-fluid">
+            </figure>
+          </div>
+          <div class="col-md" >
+            <article class="mx-auto">
+              
+              <h5 style="font-size: 28px;">Sahil Singla</h5>
+              <p class="mb-0" style="font-size: 16px;">
+                <a href="tel:(+91)8745959048" ><span class="badge badge-default text-uppercase" style="font-size: 16px;"><span></span>Contact:</span>(+91)8745959048</a>
+              </p><br><br>
+              <a href="http://fb.com/sahil.singla.3388" ><span class="badge badge-info" style="font-size: 24;">See Profile</span></a>
+            </article>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
+    </section>
+  </div>
 {% endblock %}

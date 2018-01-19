@@ -82,8 +82,8 @@ ALLOWED_HOSTS = ['*']
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'default': {         
+       'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'vqnsmsgi',
         'USER': 'vqnsmsgi',
         'PASSWORD': 'YVJk4hYCb3V7U4sAyBuB9uP1tUuuF0U0',
