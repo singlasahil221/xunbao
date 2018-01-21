@@ -55,7 +55,7 @@
                     </li>
                     <li class="">
                         {% block loga %}<a href="{% url 'myapp:logout' %}">{% endblock %}
-                            {% block log %}<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout{% endblock %}
+                            {% block log %}{% if request.user.is_authenticated %}<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout{% endif %}{% endblock %}
                         </a>
                     </li>
                 </ul>
