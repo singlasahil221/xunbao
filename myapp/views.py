@@ -83,7 +83,7 @@ def User_list(request):
         myprofile = Profile.objects.get(user=uid)
         counter =myprofile.solved
         total = Problems.objects.all().count()
-        if total <= counter:
+        if total < counter:
             strin = "you win"
             return JsonResponse(strin,safe=False)
         print(total,counter)
