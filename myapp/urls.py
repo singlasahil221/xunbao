@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^developers/$', views.developers, name='developers'),
     
     #api's
-    url(r'^getq/(?P<pk>[-\w.@]+)/$', views.User_list),
-    url(r'^checkans/(?P<user>[-\w.@]+)/(?P<pk>[-\w.@]+)/$', views.checkans),
+    url(r'^getq/$', views.User_list),
+    url(r'^checkans/$ views.checkans),
     url(r'^leaderboard_api/$', views.lead_api),
 ]
