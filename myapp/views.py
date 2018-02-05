@@ -63,3 +63,61 @@ def my_logout(request):
 
 def developers(request):
     return render(request, 'myapp/developers.html', {})
+
+
+
+@csrf_exempt
+def User_list(request,pk):
+    """
+    List all code snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        uid = User.objects.filter(email=pk)
+        snippets = Profile.objects.filter(user=uid)
+        Problem = Problems.objects.filter(pk=1)
+        #count = int(snippets)
+        serializer = UserSerializer(Problem, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = UserSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+
+
+@csrf_exempt
+def lead_api(request):
+    if(request.method == 'GET'):
+        users = Profile.objects.all()
+        serializer = LeaderboardSerializers(users,many = True)
+        return JsonResponse(serializer.data,safe=False)
+    else:
+        pass
+
+
+@csrf_exempt
+def checkans(request,user,pk):
+    if request.method == "GET":
+        problems = Problems.objects.order_by('mydate')
+        user = User.objects.filter(email=user)
+        myprofile = Profile.objects.get(user=user)
+        count = myprofile.solved
+        total = Problems.objects.all().count
+        myproblem = problems[0]
+        i = 1
+        for problem in problems:
+            if i == count:
+                myproblem = problem
+                break
+            i = i + 1
+        if pk == myproblem.ans:
+            myprofile.solved = count + 1
+            myprofile.timetaken = datetime.now()
+            myprofile.save()
+            return JsonResponse(1,safe=False)
+        else:            
+            return JsonResponse(0,safe=False)
