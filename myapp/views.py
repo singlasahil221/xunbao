@@ -10,9 +10,11 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from django.http import HttpResponse, JsonResponse
-from .serializers import UserSerializer,LeaderboardSerializers
+from .serializers import UserSerializer,LeaderboardSerializers,ProblemsSerializer
 from django.contrib.auth.models import User
-
+from rest_framework.views import APIView
+from django.utils.six import BytesIO
+import json
 app_name = 'myapp'
 
 
@@ -73,17 +75,20 @@ def developers(request):
 
 
 @csrf_exempt
-def User_list(request,pk):
-    """
-    List all code snippets, or create a new snippet.
-    """
-    if request.method == 'GET':
-        uid = User.objects.filter(email=pk)
+def User_list(request):
+    if request.method == 'POST':
+        user = json.loads(request.body)
+        user = user['email']
+        uid = User.objects.filter(email=user)
         myprofile = Profile.objects.get(user=uid)
-        count=myprofile.solved
-        total = Problems.objects.all().count
-        Problem = Problems.objects.filter(pk=count)
-        serializer = UserSerializer(Problem, many=True)
+        counter =myprofile.solved
+        total = Problems.objects.all().count()
+        if total <= counter:
+            strin = "you win"
+            return JsonResponse(strin,safe=False)
+        print(total,counter)
+        Problem = Problems.objects.filter(pk=counter)
+        serializer = ProblemsSerializer(Problem, many=True)
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
@@ -102,10 +107,13 @@ def lead_api(request):
 
 
 @csrf_exempt
-def checkans(request,user,pk):
-    if request.method == "GET":
+def checkans(request):
+    if request.method == 'POST':
+        user = json.loads(request.body)
+        ans = user['ans']
+        user = user['email']
         problems = Problems.objects.order_by('mydate')
-        user = User.objects.filter(email=user)
+        user = User.objects.get(email=user)           
         myprofile = Profile.objects.get(user=user)
         count = myprofile.solved
         total = Problems.objects.all().count        
@@ -115,11 +123,15 @@ def checkans(request,user,pk):
             if i == count:
                 myproblem = problem
                 break
-            i = i + 1
-        if pk == myproblem.ans:
+                i = i + 1
+        if ans == myproblem.ans:
             myprofile.solved = count + 1
             myprofile.timetaken = datetime.now()
             myprofile.save()
             return JsonResponse(1,safe=False)
         else:            
             return JsonResponse(0,safe=False)
+    return JsonResponse(user.errors, status=400)
+
+
+
