@@ -21,6 +21,6 @@ urlpatterns = [
     
     #api's
     url(r'^getq/$', views.User_list),
-    url(r'^checkans/$ views.checkans),
+    url(r'^checkans/$', views.checkans),
     url(r'^leaderboard_api/$', views.lead_api),
 ]
