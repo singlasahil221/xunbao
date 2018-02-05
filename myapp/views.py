@@ -79,19 +79,15 @@ def User_list(request,pk):
     """
     if request.method == 'GET':
         uid = User.objects.filter(email=pk)
-        snippets = Profile.objects.filter(user=uid)
-        Problem = Problems.objects.filter(pk=1)
-        #count = int(snippets)
+        myprofile = Profile.objects.get(user=uid)
+        count=myprofile.solved
+        total = Problems.objects.all().count
+        Problem = Problems.objects.filter(pk=count)
         serializer = UserSerializer(Problem, many=True)
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = UserSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+        pass
 
 
 
@@ -112,7 +108,7 @@ def checkans(request,user,pk):
         user = User.objects.filter(email=user)
         myprofile = Profile.objects.get(user=user)
         count = myprofile.solved
-        total = Problems.objects.all().count
+        total = Problems.objects.all().count        
         myproblem = problems[0]
         i = 1
         for problem in problems:
