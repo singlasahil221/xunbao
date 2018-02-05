@@ -55,8 +55,8 @@
                     </li>
                     <li class="">
                         {% if not request.user.is_authenticated %}
-                        <a href="{% url 'social:begin' 'google-oauth2' %}">
-                            Login with Google
+                        <a href="{% url 'social:begin' 'facebook' %}">
+                            Login with Facebook
                         </a>
                         {% endif %}
                     </li>
