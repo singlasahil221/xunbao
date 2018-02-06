@@ -78,6 +78,8 @@ def developers(request):
 def User_list(request):
     if request.method == 'POST':
         user = json.loads(request.body)
+        if(user['skey'] != 'abbv'):
+                return JsonResponse(0,safe=False)
         user = user['email']
         uid = User.objects.filter(email=user)
         myprofile = Profile.objects.get(user=uid)
@@ -111,6 +113,8 @@ def checkans(request):
     if request.method == 'POST':
         user = json.loads(request.body)
         ans = user['ans']
+        if(user['skey'] != 'abbv'):
+            return JsonResponse(0,safe=False)
         user = user['email']
         problems = Problems.objects.order_by('mydate')
         user = User.objects.get(email=user)           
