@@ -82,7 +82,7 @@ def User_list(request):
             if(user['skey'] != 'abbv'):
                     return JsonResponse(0,safe=False)
             user = user['email']
-            if not User.objects.filter(email=user).exist():
+            if not User.objects.filter(email=user).exists():
                 return JsonResponse(0,safe=False)
             uid = User.objects.filter(email=user)
             myprofile = Profile.objects.get(user=uid)
