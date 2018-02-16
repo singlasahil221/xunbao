@@ -111,30 +111,31 @@ def lead_api(request):
 @csrf_exempt
 def checkans(request):
     if request.method == 'POST':
-        user = json.loads(request.body)
-        ans = user['ans']
-        if(user['skey'] != 'abbv'):
-            return JsonResponse(0,safe=False)
-        user = user['email']
-        problems = Problems.objects.order_by('mydate')
-        user = User.objects.get(email=user)           
-        myprofile = Profile.objects.get(user=user)
-        count = myprofile.solved
-        total = Problems.objects.all().count        
-        myproblem = problems[0]
-        i = 1
-        for problem in problems:
-            if i == count:
-                myproblem = problem
-                break
-                i = i + 1
-        if ans == myproblem.ans:
-            myprofile.solved = count + 1
-            myprofile.timetaken = datetime.now()
-            myprofile.save()
-            return JsonResponse(1,safe=False)
-        else:            
-            return JsonResponse(0,safe=False)
+        prob = json.loads(request.body)
+        for user in prob:
+            ans = user['ans']
+            if(user['skey'] != 'abbv'):
+                return JsonResponse(0,safe=False)
+            user = user['email']
+            problems = Problems.objects.order_by('mydate')
+            user = User.objects.get(email=user)           
+            myprofile = Profile.objects.get(user=user)
+            count = myprofile.solved
+            total = Problems.objects.all().count        
+            myproblem = problems[0]
+            i = 1
+            for problem in problems:
+                if i == count:
+                    myproblem = problem
+                    break
+                    i = i + 1
+            if ans == myproblem.ans:
+                myprofile.solved = count + 1
+                myprofile.timetaken = datetime.now()
+                myprofile.save()
+                return JsonResponse(1,safe=False)
+            else:            
+                return JsonResponse(0,safe=False)
     return JsonResponse(user.errors, status=400)
 
 
