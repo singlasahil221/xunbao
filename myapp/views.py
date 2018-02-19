@@ -82,12 +82,10 @@ def User_list(request):
             if(user['skey'] != 'abbv'):
                     return JsonResponse(0,safe=False)
             user = user['email']
-            if not User.objects.filter(email=user).exists():
-                return JsonResponse(0,safe=False)
-            uid = User.objects.filter(email=user)
+            uid , created = User.objects.get_or_create(username=user)
             myprofile = Profile.objects.get(user=uid)
             counter =myprofile.solved
-            total = Problems.objects.all().count()
+            total = Problems.objects.all().count
             if total < counter:
                 strin = {'response':"you win"}
                 return JsonResponse(strin,safe=False)
