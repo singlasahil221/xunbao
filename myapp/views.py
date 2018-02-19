@@ -120,7 +120,10 @@ def checkans(request):
         user = User.objects.get(username=user)           
         myprofile = Profile.objects.get(user=user)
         count = myprofile.solved
-        total = Problems.objects.all().count        
+        total = Problems.objects.all().count()
+        if total < counter:
+                strin = {'response':"you win"}
+                return JsonResponse(strin,safe=False)
         myproblem = problems[0]
         i = 1
         for problem in problems:
