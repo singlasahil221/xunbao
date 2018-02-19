@@ -80,7 +80,8 @@ def User_list(request):
         prob = json.loads(request.body)
         for user in prob:
             if(user['skey'] != 'abbv'):
-                    return JsonResponse(0,safe=False)
+                strin = {'response':"0"}
+                return JsonResponse(strin,safe=False)
             user = user['email']
             uid , created = User.objects.get_or_create(username=user)
             myprofile = Profile.objects.get(user=uid)
@@ -112,10 +113,11 @@ def checkans(request):
         user = json.loads(request.body)
         ans = user['ans']
         if(user['skey'] != 'abbv'):
-            return JsonResponse(0,safe=False)
+            strin = {'response':"0"}
+            return JsonResponse(strin,safe=False)
         user = user['email']
         problems = Problems.objects.order_by('mydate')
-        user = User.objects.get(email=user)           
+        user = User.objects.get(username=user)           
         myprofile = Profile.objects.get(user=user)
         count = myprofile.solved
         total = Problems.objects.all().count        
@@ -130,9 +132,11 @@ def checkans(request):
             myprofile.solved = count + 1
             myprofile.timetaken = datetime.now()
             myprofile.save()
-            return JsonResponse(1,safe=False)
-        else:            
-            return JsonResponse(0,safe=False)
+            strin = {'response':"1"}
+            return JsonResponse(strin,safe=False)
+        else:      
+            strin = {'response':"0"}
+            return JsonResponse(strin,safe=False)
     return JsonResponse(user.errors, status=400)
 
 
