@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^getq/$', views.User_list),
     url(r'^checkans/$', views.checkans),
     url(r'^leaderboard_api/$', views.lead_api),
+    url(r'^status/$', views.status),
 ]
