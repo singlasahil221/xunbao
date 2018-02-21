@@ -80,7 +80,7 @@ def User_list(request):
         prob = json.loads(request.body)
         for user in prob:
             if(user['skey'] != 'abbv'):
-                strin = {'response':"0"}
+                strin = [{'response':"0"},]
                 return JsonResponse(strin,safe=False)
             user = user['email']
             uid , created = User.objects.get_or_create(username=user)
@@ -88,7 +88,7 @@ def User_list(request):
             counter =myprofile.solved
             total = Problems.objects.all().count()
             if total < counter:
-                strin = {'response':"you win"}
+                strin = [{'response':"you win"},]
                 return JsonResponse(strin,safe=False)
             print(total,counter)
             Problem = Problems.objects.filter(pk=counter)
