@@ -82,8 +82,9 @@ def User_list(request):
             if(user['skey'] != 'abbv'):
                 strin = [{'response':"0"},]
                 return JsonResponse(strin,safe=False)
+            name = user['name']
             user = user['email']
-            uid , created = User.objects.get_or_create(username=user)
+            uid , created = User.objects.get_or_create(username=user,first_name=name)
             myprofile = Profile.objects.get(user=uid)
             counter =myprofile.solved
             total = Problems.objects.all().count()
