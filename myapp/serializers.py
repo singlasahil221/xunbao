@@ -19,4 +19,4 @@ class LeaderboardSerializers(serializers.ModelSerializer):
 	#User = UserSerializer(many=True)
 	class Meta:
 		model = Profile
-		fields = ('user','solved')
+		fields = ('user.first_name','solved')
