@@ -6,7 +6,7 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,many=True)
     solved = models.IntegerField(default=1)
     timetaken = models.DateTimeField(default=datetime.now)
 
