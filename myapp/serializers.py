@@ -15,7 +15,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class LeaderboardSerializers(serializers.ModelSerializer):
-	user = serializers.CharField(source='first_name' + ' ' + 'last_name')	
+	first = serializers.SlugRelatedField(read_only=True,slug_field='first_name')
+	last = serializers.SlugRelatedField(read_only=True,slug_field='last_name')
+	name = first+last
 	class Meta:
 		model = Profile
-		fields = ('user','solved')
+		fields = ('name','solved')
