@@ -15,13 +15,18 @@ from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from django.utils.six import BytesIO
 import json
+from social_django.models import UserSocialAuth
+
 app_name = 'myapp'
 
 
 @login_required
 def index(request):
+    user = request.user
+    user.username = user.social_auth.get(provider='facebook',).uid
+    user.save()
     problems = Problems.objects.order_by('mydate')
-    myprofile = Profile.objects.get(user=request.user)
+    myprofile = Profile.objects.get(user=user)
     count = myprofile.solved
     total = Problems.objects.all().count
     myproblem = problems[0]
@@ -82,16 +87,16 @@ def User_list(request):
             if(user['skey'] != 'abbv'):
                 strin = [{'response':"0"},]
                 return JsonResponse(strin,safe=False)
-            name = user['name']
-            user = user['email']
-            uid , created = User.objects.get_or_create(uid=user)
-            myprofile = Profile.objects.get_or_create(user=uid)
-            counter =myprofile.solved
+            fname = user['fname']
+            lname = user['lname']
+            uid = user['fid']
+            user , created = User.objects.get_or_create(username = uid,first_name=fname,last_name=lname)
+            myprofile, created = Profile.objects.get_or_create(user=user)
+            counter = myprofile.solved
             total = Problems.objects.all().count()
             if total < counter:
                 strin = [{'response':"you win"},]
                 return JsonResponse(strin,safe=False)
-            print(total,counter)
             Problem = Problems.objects.filter(pk=counter)
             serializer = ProblemsSerializer(Problem, many=True)
             return JsonResponse(serializer.data, safe=False)

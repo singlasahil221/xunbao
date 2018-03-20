@@ -11,11 +11,11 @@ class ProblemsSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = User
-		fields = ('first_name','last_name')
+		fields = ('first_name','last_name','username')
 
 
 class LeaderboardSerializers(serializers.ModelSerializer):
-	user = serializers.SlugRelatedField(read_only=True,slug_field='username')
+	user = UserSerializer(read_only = True)
 	class Meta:
 		model = Profile
 		fields = ('user','solved')
