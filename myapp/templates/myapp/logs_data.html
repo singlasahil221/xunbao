@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Xunbao | Logs</title>
+	<style type="text/css">
+		th{
+			padding: 10px;
+			border: 2px solid black;
+		}
+		td{
+			padding: 10px;
+			border: 2px solid black;
+		}
+	</style>
+</head>
+<body style="margin-left: 25%;">
+<table style="font-size: 20px;text-align: center;padding:10px;border-color: 5px solid black;">
+	<tr>
+	<th>Username</th>
+	<th>User fid</th>
+	<th>Answer</th>
+	<th>Status</th>
+	<th>time</th>
+</tr>
+{%for i in logs%}
+<tr>
+	<td>{{i.user.first_name}} {{i.user.last_name}}</td>
+	<td>{{i.user.username}}</td>
+	<td>{{i.answer}}</td>
+	<td>{{i.status}}</td>
+	<td>{{i.time}}</td>
+</tr>
+{%endfor%}
+</table>
+</body>
+</html>

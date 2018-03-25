@@ -4,7 +4,7 @@ from django.urls import reverse
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
-from .models import Problems, Profile
+from .models import Problems, Profile, logs
 from .forms import AnswerForm
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
@@ -23,8 +23,9 @@ app_name = 'myapp'
 @login_required
 def index(request):
     user = request.user
-    user.username = user.social_auth.get(provider='facebook',).uid
-    user.save()
+    if not request.user.is_superuser:
+        user.username = user.social_auth.get(provider='facebook').uid
+        user.save()
     problems = Problems.objects.order_by('mydate')
     myprofile = Profile.objects.get(user=user)
     count = myprofile.solved
@@ -40,7 +41,12 @@ def index(request):
     if request.method == 'POST':
         form = AnswerForm(request.POST)
         if form.is_valid():
+            print(form.cleaned_data['ans'])
+            log = logs.objects.create(answer = form.cleaned_data['ans'],user = request.user)
+            log.save()
             if form.cleaned_data['ans'] == myproblem.ans:
+                log.status = True
+                log.save()
                 myprofile.solved = count + 1
                 myprofile.timetaken = datetime.now()
                 myprofile.save()
@@ -122,6 +128,9 @@ def checkans(request):
             strin = {'response':"0"}
             return JsonResponse(strin,safe=False)
         user = user['email']
+        print(ans)
+        log = logs.objects.create(answer = ans,user = user)
+        log.save()
         problems = Problems.objects.order_by('mydate')
         user = User.objects.get(username=user)           
         myprofile = Profile.objects.get(user=user)
@@ -138,6 +147,8 @@ def checkans(request):
                 break
                 i = i + 1
         if ans == myproblem.ans:
+            log.status = True
+            log.save()
             myprofile.solved = count + 1
             myprofile.timetaken = datetime.now()
             myprofile.save()
@@ -148,7 +159,13 @@ def checkans(request):
             return JsonResponse(strin,safe=False)
     return JsonResponse(user.errors, status=400)
 
-
+@login_required
+def logs_data(request):
+    log = logs.objects.all()
+    if request.user.is_superuser:
+        return render(request,'myapp/logs_data.html',{'logs':log})
+    else:
+        return HttpResponse('You are not authenticated.')
 
 
 

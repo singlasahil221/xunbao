@@ -30,3 +30,12 @@ class Problems(models.Model):
     image = models.FileField(blank=True)
     ans = models.CharField(max_length=10000, null=True)
     mydate = models.DateTimeField(default=datetime.now)
+
+
+class logs(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    answer = models.CharField(max_length=10000)
+    time = models.DateTimeField(default=datetime.now)
+    status = models.BooleanField(default = False)
+    def __str__(self):
+        return self.user.username
