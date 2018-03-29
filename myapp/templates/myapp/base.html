@@ -12,8 +12,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="{% static 'js/myjs.js' %}"></script>
+    <style type="text/css">
+        {%block style%}
+        {%endblock%}
+    </style>
 </head>
-<body style="background: url('{% static 'images/bg2.gif' %}'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;" >
+<body style="background: url('https://www.indeedcare.com/site/wp-content/uploads/2014/02/002-blurred-background-texture-vol2.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;" >
         <script>
   window.fbAsyncInit = function() {
     FB.init({

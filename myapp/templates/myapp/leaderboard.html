@@ -14,27 +14,40 @@
                 </thead>
                 <tbody>
                     {% for profile in profiles %}
-                    <tr>
-                        <td>
-                            {{ forloop.counter }}
-                        </td>
-                        {% if request.user == profile.user%}
+                    {% if not profile.user.is_superuser %}
+                    <tr>   
+                    <td>
+                        
+                    </td>                     
+                       {% if request.user == profile.user %}
                         <td style="background-color: #000;color:#fff;"> 
                             {{ profile.user.first_name }} {{ profile.user.last_name }}
                         </td>
-                        {%else%}
+                        {% else %}
                         <td>
                             {{ profile.user.first_name }} {{ profile.user.last_name }}
-                        </td>
-                        {% endif %}
+                        </td>                        
                         <td>
                             {{ profile.solved|add:"-1" }}
                         </td>
+                        {% endif %}
                     </tr>
+                    {% else %}
+                        {% endif %}
                     {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    var addSerialNumber = function () {
+    var i = 0
+    $('table tr').each(function(index) {
+        $(this).find('td:nth-child(1)').html(index-1+1);
+    });
+};
+
+addSerialNumber();
+</script>
 {% endblock %}

@@ -90,7 +90,7 @@ def User_list(request):
     if request.method == 'POST':
         prob = json.loads(request.body)
         for user in prob:
-            if(user['skey'] != 'abbv'):
+            if(user['skey'] != 'sexokashish'):
                 strin = [{'response':"0"},]
                 return JsonResponse(strin,safe=False)
             fname = user['fname']
@@ -124,7 +124,7 @@ def checkans(request):
     if request.method == 'POST':
         user = json.loads(request.body)
         ans = user['ans']
-        if(user['skey'] != 'abbv'):
+        if(user['skey'] != 'sexokashish'):
             strin = {'response':"0"}
             return JsonResponse(strin,safe=False)
         user = user['email']
