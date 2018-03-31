@@ -129,10 +129,10 @@ def checkans(request):
             return JsonResponse(strin,safe=False)
         user = user['email']
         print(ans)
+        user = User.objects.get(username = user)
         log = logs.objects.create(answer = ans,user = user)
         log.save()
-        problems = Problems.objects.order_by('mydate')
-        user = User.objects.get(username=user)           
+        problems = Problems.objects.order_by('mydate')          
         myprofile = Profile.objects.get(user=user)
         count = myprofile.solved
         total = Problems.objects.all().count()
