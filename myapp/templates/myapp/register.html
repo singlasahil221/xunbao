@@ -2,10 +2,27 @@
 {%load static%}
 {% block body %}
     <div class="container-fluid">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <strong>You must login first!</strong>
-            </div>
+      <div class="row no-gutters">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="panel panel-default m-3">
+              <div class="panel-body text-center">
+                  <strong>You must login first!</strong>
+              </div>
+          </div>
         </div>
+        <div class="col-md-3"></div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="panel panel-default m-3">
+              <div class="panel-body text-center">
+                  <strong><a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a></strong>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
     </div>
 {% endblock %}
