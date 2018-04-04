@@ -1,26 +1,26 @@
 {% extends 'myapp/base.html' %}
 {%load static%}
+
 {% block body %}
     <div class="container-fluid">
       <div class="row no-gutters">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-          <div class="panel panel-default m-3">
-              <div class="panel-body text-center">
-                  <strong>You must login first!</strong>
-              </div>
+          <div class="alert alert-info alert-dismissible show" role="alert">
+            You must login first!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
         </div>
         <div class="col-md-3"></div>
       </div>
       <div class="row no-gutters">
         <div class="col-md-3"></div>
-        <div class="col-md-6">
-          <div class="panel panel-default m-3">
-              <div class="panel-body text-center">
-                  <strong><a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a></strong>
-              </div>
-          </div>
+        <div class="col-md-6" align="middle">
+          <button class="loginBtn loginBtn--facebook">
+            Login with Facebook
+          </button>
         </div>
         <div class="col-md-3"></div>
       </div>
