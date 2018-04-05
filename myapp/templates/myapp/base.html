@@ -77,19 +77,13 @@
                             <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>&nbsp; Developers
                         </a>
                     </li>
-                    <li class="">
-                        {% if not request.user.is_authenticated %}
-                        <a href="{% url 'social:begin' 'facebook' %}">
-                            Login with Facebook
-                        </a>
-                        {% endif %}
-                    </li>
+                    {% if request.user.is_authenticated %}
                     <li class="">
                         {% block loga %}<a href="{% url 'myapp:logout' %}">{% endblock %}
-                            {% block log %}{% if request.user.is_authenticated %}<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout{% endif %}{% endblock %}
+                            {% block log %}<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout{% endblock %}
                         </a>
                     </li>
-
+{% endif %}
                 </ul>
             </div>
         <!-- </div> -->
