@@ -41,10 +41,9 @@ def index(request):
     if request.method == 'POST':
         form = AnswerForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data['ans'])
-            log = logs.objects.create(answer = form.cleaned_data['ans'],user = request.user)
+            log = logs.objects.create(answer = form.cleaned_data['ans'].lower(),user = request.user)
             log.save()
-            if form.cleaned_data['ans'] == myproblem.ans:
+            if form.cleaned_data['ans'].lower() == myproblem.ans.lower():
                 log.status = True
                 log.save()
                 myprofile.solved = count + 1
@@ -123,7 +122,7 @@ def lead_api(request):
 def checkans(request):
     if request.method == 'POST':
         user = json.loads(request.body)
-        ans = user['ans']
+        ans = user['ans'].lower()
         if(user['skey'] != 'sexokashish'):
             strin = {'response':"0"}
             return JsonResponse(strin,safe=False)
@@ -146,7 +145,7 @@ def checkans(request):
                 myproblem = problem
                 break
                 i = i + 1
-        if ans == myproblem.ans:
+        if ans == myproblem.ans.lower():
             log.status = True
             log.save()
             myprofile.solved = count + 1
