@@ -25,10 +25,10 @@
                         <td style="padding: 12px 0">
                             {{ profile.user.first_name }} {{ profile.user.last_name }}
                         </td>
+                        {% endif %}
                         <td style="padding: 12px 0">
                             {{ profile.solved|add:"-1" }}
-                        </td>
-                        {% endif %}
+                        </td>                        
                     </tr>
                     {% else %}
                         {% endif %}
