@@ -23,7 +23,7 @@ app_name = 'myapp'
 @login_required
 def index(request):
     user = request.user
-    if not request.user.is_superuser:
+    if not(request.user.is_superuser)and not(user.username.isnumeric()):
         user.username = user.social_auth.get(provider='facebook').uid
         user.save()
     problems = Problems.objects.order_by('mydate')
