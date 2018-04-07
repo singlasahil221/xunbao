@@ -1,6 +1,6 @@
 body{
     background-size: 100% 100%;
-    background-image: url('./staticfiles/images/back_xunbao.jpg');
+    background-image: url("{% static 'images/back_xunbao.jpg'%}");
 }
 
 .panel-transparent {
