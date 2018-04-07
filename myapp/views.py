@@ -23,13 +23,22 @@ app_name = 'myapp'
 @login_required
 def index(request):
     user = request.user
-    fid = user.social_auth.get(provider='facebook').uid
     if not request.user.is_superuser :
-        if not(user.username.isnumeric()):
-            all_user = request.user.objects.all()
-            for i in all_user:
-                if(i.username == fid):
-                    request.user = user
+        if not user.username.isnumeric():
+            fid = user.social_auth.get(provider='facebook').uid
+            x = Profile.objects.filter(user__username = fid)
+            if not x:
+                user.username = fid
+            else:
+                x=x[0]
+                z = x.solved
+                y = x.timetaken
+                x.user.delete()
+                user.username = fid
+                user.solved = z
+                user.timetaken = y
+    user.save()
+
     problems = Problems.objects.order_by('mydate')
     myprofile = Profile.objects.get(user=user)
     count = myprofile.solved
@@ -134,7 +143,7 @@ def checkans(request):
         user = User.objects.get(username = user)
         log = logs.objects.create(answer = ans,user = user)
         log.save()
-        problems = Problems.objects.order_by('mydate')          
+        problems = Problems.objects.all().order_by('mydate')          
         myprofile = Profile.objects.get(user=user)
         count = myprofile.solved
         total = Problems.objects.all().count()
@@ -147,7 +156,7 @@ def checkans(request):
             if i == count:
                 myproblem = problem
                 break
-                i = i + 1
+            i = i + 1
         if ans == myproblem.ans.lower():
             log.status = True
             log.save()
