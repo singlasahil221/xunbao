@@ -1,10 +1,10 @@
 {% extends 'myapp/base.html' %}
 
 {% block body %}
-<div class="container" style="opacity: 0.9">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <table class="responsive">
+<div class="container" style="opacity: 0.9;>
+    <div class="panel panel-default" style="border: 0; border-radius: 3px;">
+        <div class="panel-body" style="border: 0; padding: 0;">
+            <table class="responsive" style="background: url('http://www.innatthecrossroads.com/wp-content/uploads/2016/10/Wooden-background-texture-pattern-images-for-website-HD-template-PSD-free-download.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover; color: #ffe3b4; padding: 40px 0;">
                 <thead>
                   <tr>
                       <th>Rank</th>
@@ -28,7 +28,7 @@
                         {% endif %}
                         <td style="padding: 12px 0">
                             {{ profile.solved|add:"-1" }}
-                        </td>                        
+                        </td>
                     </tr>
                     {% else %}
                         {% endif %}

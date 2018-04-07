@@ -18,7 +18,9 @@
         {%endblock%}
     </style>
 </head>
-<body style="background: url('https://www.indeedcare.com/site/wp-content/uploads/2014/02/002-blurred-background-texture-vol2.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;" >
+<!-- <body style="background: url('https://www.indeedcare.com/site/wp-content/uploads/2014/02/002-blurred-background-texture-vol2.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;" > -->
+<!-- <body style="background: url('https://raw.githubusercontent.com/Manan-YMCA/EC2018App/master/app/src/main/res/drawable/back_xunbao.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;" > -->
+<body style="background: url('https://i.stack.imgur.com/jGlzr.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;" >
         <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -37,7 +39,7 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" style="background-color: #f2e7cb87; padding: 3px; border: 0;">
         <!-- <div class="container-fluid"> -->
             <!-- Header -->
             <div class="navbar-header">
@@ -46,14 +48,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{% url 'myapp:index' %}" style="font-size: 30px;"><strong>Xunbao</strong></a>
+                <a class="navbar-brand" href="{% url 'myapp:index' %}" style="font-size: 30px;"><img class="img-responsive2"
+           src="{% static 'images/xunbao_logo.png' %}" style="width:120px;height:auto;margin-top:-10px"></a>
             </div>
 
             <!-- Items -->
             <div class="collapse navbar-collapse" id="topNavBar">   <!-- anything in this div is going to be hidden-->
                 <ul class="nav navbar-nav">
                     <li class="">
-                        <a href="{% url 'myapp:index' %}">
+                        <a style="color: #43362c;" href="{% url 'myapp:index' %}">
                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp; Home
                         </a>
                     </li>
@@ -62,18 +65,18 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="">
                     {% if request.user.is_authenticated %}
-                        <a href="">
+                        <a style="color: #43362c;" href="">
                             <strong>Hey {{ user.first_name }}! </strong>
                         </a>
                     {% endif %}
                     </li>
                     <li class="">
-                        <a href="{% url 'myapp:leaderboard' %}">
+                        <a style="color: #43362c;" href="{% url 'myapp:leaderboard' %}">
                             <span class="glyphicon glyphicon-list" aria-hidden="true"></span>&nbsp; Leaderboard
                         </a>
                     </li>
                     <li class="">
-                        <a href="{% url 'myapp:developers' %}">
+                        <a style="color: #43362c;" href="{% url 'myapp:developers' %}">
                             <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>&nbsp; Developers
                         </a>
                     </li>
