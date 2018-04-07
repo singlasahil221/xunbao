@@ -111,7 +111,7 @@ def User_list(request):
 @csrf_exempt
 def lead_api(request):
     if(request.method == 'GET'):
-        users = Profile.objects.all()
+        users = Profile.objects.all().exclude(user__is_superuser = True)
         serializer = LeaderboardSerializers(users,many = True)
         return JsonResponse(serializer.data,safe=False)
     else:

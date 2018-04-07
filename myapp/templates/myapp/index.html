@@ -11,7 +11,9 @@
                 {% if forloop.counter == count %}
                     <h2 style="text-align:center;">Level : {{ forloop.counter }}</h2>
                     <h4 style="text-align:center;">{{ problem.desc }}</h4>
+                    {% if problem.image %}
                     <img src="/media/{{ problem.image }}" class="center img-responsive" style="width: 300px; height: 200px;">
+                    {% endif %}
                     {{ break }}
                 {% endif %}
             {% endfor %}
