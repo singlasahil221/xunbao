@@ -23,9 +23,13 @@ app_name = 'myapp'
 @login_required
 def index(request):
     user = request.user
-    if not(request.user.is_superuser)and not(user.username.isnumeric()):
-        user.username = user.social_auth.get(provider='facebook').uid
-        user.save()
+    fid = user.social_auth.get(provider='facebook').uid
+    if not request.user.is_superuser :
+        if not(user.username.isnumeric()):
+            all_user = request.user.objects.all()
+            for i in all_user:
+                if(i.username == fid):
+                    request.user = user
     problems = Problems.objects.order_by('mydate')
     myprofile = Profile.objects.get(user=user)
     count = myprofile.solved
