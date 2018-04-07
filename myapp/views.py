@@ -87,24 +87,23 @@ def developers(request):
 @csrf_exempt
 def User_list(request):
     if request.method == 'POST':
-        prob = json.loads(request.body)
-        for user in prob:
-            if(user['skey'] != 'sexokashish'):
-                strin = [{'response':"0"},]
-                return JsonResponse(strin,safe=False)
-            fname = user['fname']
-            lname = user['lname']
-            uid = user['fid']
-            user , created = User.objects.get_or_create(username = uid,first_name=fname,last_name=lname)
-            myprofile, created = Profile.objects.get_or_create(user=user)
-            counter = myprofile.solved
-            total = Problems.objects.all().count()
-            if total < counter:
-                strin = [{'response':"you win"},]
-                return JsonResponse(strin,safe=False)
-            Problem = Problems.objects.filter(pk=counter)
-            serializer = ProblemsSerializer(Problem, many=True)
-            return JsonResponse(serializer.data, safe=False)
+        user = request.POST
+        if(user['skey'] != 'sexokashish'):
+            strin = [{'response':"0"},]
+            return JsonResponse(strin,safe=False)
+        fname = user['fname']
+        lname = user['lname']
+        uid = user['fid']
+        user , created = User.objects.get_or_create(username = uid,first_name=fname,last_name=lname)
+        myprofile, created = Profile.objects.get_or_create(user=user)
+        counter = myprofile.solved
+        total = Problems.objects.all().count()
+        if total < counter:
+            strin = [{'response':"you win"},]
+            return JsonResponse(strin,safe=False)
+        Problem = Problems.objects.filter(val = counter)
+        serializer = ProblemsSerializer(Problem, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
 
@@ -121,7 +120,7 @@ def lead_api(request):
 @csrf_exempt
 def checkans(request):
     if request.method == 'POST':
-        user = json.loads(request.body)
+        user = request.POST
         ans = user['ans'].lower()
         if(user['skey'] != 'sexokashish'):
             strin = {'response':"0"}

@@ -13,6 +13,9 @@ class Profile(models.Model):
     class Meta:
         ordering = ['-solved', 'timetaken']
 
+    def __str__(self):
+        return self.user.first_name + self.user.last_name
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -30,6 +33,10 @@ class Problems(models.Model):
     image = models.FileField(blank=True)
     ans = models.CharField(max_length=10000, null=True)
     mydate = models.DateTimeField(default=datetime.now)
+    val = models.IntegerField(blank=False,default=1)
+    #pk = models.AutoField(primary_key=True)
+    def __str__(self):
+        return self.desc
 
 
 class logs(models.Model):
