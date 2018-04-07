@@ -1,5 +1,6 @@
 body{
     background-size: 100% 100%;
+    background-image: url('./staticfiles/images/back_xunbao.jpg');
 }
 
 .panel-transparent {
@@ -27,6 +28,9 @@ button{
 .navbar{
     border-radius: 0;
 }
+/* .navbar-default .navbar-nav>li>a{
+  color: #885f3d !important;
+} */
 
 .modal {
     display: none; /* Hidden by default */
