@@ -172,7 +172,7 @@ def checkans(request):
 
 @login_required
 def logs_data(request):
-    log = logs.objects.all()
+    log = logs.objects.all().order_by('-time')
     if request.user.is_superuser:
         return render(request,'myapp/logs_data.html',{'logs':log})
     else:
@@ -182,7 +182,7 @@ def logs_data(request):
 
 def status(request):
     if request.method == "GET":
-        return JsonResponse(1,safe = False) #coming soon
+        #return JsonResponse(1,safe = False) #coming soon
         return JsonResponse(2,safe = False) #started
         return JsonResponse(3,safe = False) #end
 
