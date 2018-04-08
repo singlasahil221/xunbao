@@ -182,7 +182,7 @@ def logs_data(request):
 
 def status(request):
     if request.method == "GET":
-        return JsonResponse(1,safe = False) #coming soon
+        #return JsonResponse(1,safe = False) #coming soon
         return JsonResponse(2,safe = False) #started
         return JsonResponse(3,safe = False) #end
 
